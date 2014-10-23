@@ -17,8 +17,11 @@ def hook_listen():
 
             if hook_value:
                 #payload = request.get_json()
-                subprocess.call(hook_value)
-                return jsonify(success=True), 200
+                try:
+                    subprocess.call(hook_value)
+                    return jsonify(success=True), 200
+                except OSError as e:
+                    return jsonify(success=False, error=str(e)), 400
             else:
                 return jsonify(success=False, error="Hook not found"), 404
         else:
