@@ -3,6 +3,6 @@
     "port": 8000,
     "token": "abc123",
     "hooks": {
-        "myhook1": "restart-container-myhook1.sh"
+        "hello": "scripts/hello.sh"
     }
 }

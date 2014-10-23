@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 import json
+import subprocess
 
 app = Flask(__name__)
 config = None
@@ -15,8 +16,8 @@ def hook_listen():
             hook_value = config['hooks'].get(hook)
 
             if hook_value:
-                payload = request.get_json()
-                print payload
+                #payload = request.get_json()
+                subprocess.call(hook_value)
                 return jsonify(success=True), 200
             else:
                 return jsonify(success=False, error="Hook not found"), 404
