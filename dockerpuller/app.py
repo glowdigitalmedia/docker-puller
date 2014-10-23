@@ -13,17 +13,21 @@ def hook_listen():
         token = request.args.get('token')
         if token == config['token']:
             hook = request.args.get('hook')
-            hook_value = config['hooks'].get(hook)
 
-            if hook_value:
-                #payload = request.get_json()
-                try:
-                    subprocess.call(hook_value)
-                    return jsonify(success=True), 200
-                except OSError as e:
-                    return jsonify(success=False, error=str(e)), 400
+            if hook:
+                hook_value = config['hooks'].get(hook)
+
+                if hook_value:
+                    #payload = request.get_json()
+                    try:
+                        subprocess.call(hook_value)
+                        return jsonify(success=True), 200
+                    except OSError as e:
+                        return jsonify(success=False, error=str(e)), 400
+                else:
+                    return jsonify(success=False, error="Hook not found"), 404
             else:
-                return jsonify(success=False, error="Hook not found"), 404
+                return jsonify(success=False, error="Invalid request: missing hook"), 400
         else:
             return jsonify(success=False, error="Invalid token"), 400
 
