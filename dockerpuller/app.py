@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import jsonify
 import json
 
 app = Flask(__name__)
@@ -9,16 +10,18 @@ config = None
 def hook_listen():
     if request.method == 'POST':
         token = request.args.get('token')
-        #import ipdb; ipdb.set_trace()
         if token == config['token']:
             hook = request.args.get('hook')
-            payload = request.get_json()
-            print payload
-            print payload['repository']['owner']
-            print config
-            return "ok", 200
+            hook_value = config['hooks'].get(hook)
+
+            if hook_value:
+                payload = request.get_json()
+                print payload
+                return jsonify(success=True), 200
+            else:
+                return jsonify(success=False, error="Hook not found"), 404
         else:
-            return "Invalid token", 400
+            return jsonify(success=False, error="Invalid token"), 400
 
 def load_config():
     with open('config.json') as config_file:    
