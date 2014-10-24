@@ -1,0 +1,23 @@
+language: python
+
+python:
+  - "2.7"
+
+branches:
+  only:
+    - devel
+    - master
+
+before_install:
+  - export PATH=$PATH:/home/travis/python-bin
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - cd dockerpuller  
+  - python tests.py
+
+notifications:
+  email:
+    - devteam@thisisglow.com
