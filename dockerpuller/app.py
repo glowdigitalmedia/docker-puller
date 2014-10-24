@@ -18,7 +18,6 @@ def hook_listen():
                 hook_value = config['hooks'].get(hook)
 
                 if hook_value:
-                    #payload = request.get_json()
                     try:
                         subprocess.call(hook_value)
                         return jsonify(success=True), 200
