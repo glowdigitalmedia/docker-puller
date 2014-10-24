@@ -27,5 +27,19 @@ class DockerPullerTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         assert "Invalid token" in response.data
 
+    def test_get_not_allowed(self):
+        response = self.app.get("/?token=abc123&hook=hello")
+        self.assertEqual(response.status_code, 405)
+
+    def test_invalid_hook(self):
+        response = self.app.post("/?token=abc123&hook=wronghook")
+        self.assertEqual(response.status_code, 404)
+        assert "Hook not found" in response.data
+
+    def test_hook_not_specified(self):
+        response = self.app.post("/?token=abc123")
+        self.assertEqual(response.status_code, 400)
+        assert "missing hook" in response.data
+
 if __name__ == '__main__':
     unittest.main()
