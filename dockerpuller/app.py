@@ -37,4 +37,4 @@ def load_config():
 
 if __name__ == '__main__':
     config = load_config()
-    app.run(host=config['host'], port=config['port'])
+    app.run(host=config.get('host', 'localhost'), port=config.get('port', 8000))
