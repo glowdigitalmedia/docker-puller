@@ -1,5 +1,7 @@
 # docker-puller ![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 
+[![Travis-CI Status](https://secure.travis-ci.org/glowdigitalmedia/docker-puller.png?branch=master)](http://travis-ci.org/#!/glowdigitalmedia/docker-puller)
+
 Listen for web hooks (i.e: from docker.io builds) and run a command after that.
 
 Introduction
