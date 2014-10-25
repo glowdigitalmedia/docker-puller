@@ -1,4 +1,4 @@
-# docker-puller! [License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
+# docker-puller ![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 
 Listen for web hooks (i.e: from docker.io builds) and run a command after that.
 
